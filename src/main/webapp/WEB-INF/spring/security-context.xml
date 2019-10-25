@@ -19,8 +19,8 @@
         <sec:intercept-url pattern="/**" access="isAuthenticated()" />
         <!-- 폼 로그인 설정 -->
         <sec:form-login login-page="/signin"
-                        login-processing-url="/signin"
-                        default-target-url="/main"
+                        login-processing-url="/signin" 
+                        default-target-url="/main?signin"
                         username-parameter="id" 
                         password-parameter="password"
                         authentication-failure-url="/signin?fail" 
@@ -30,9 +30,10 @@
                     logout-url="/signout"   
                     logout-success-url="/signin?signout" />
         <!-- 세션 관련 설정 -->
-        <sec:session-management invalid-session-url="/signin">
-        	<sec:concurrency-control max-sessions="3"
-        	                         expired-url="/signin"
+        	<!-- 로그아웃 성공시 세션이 만료되어 invalid-session-url 로 리다이렉트됨 -->
+        <sec:session-management invalid-session-url="/signin?signout">
+        	<sec:concurrency-control max-sessions="1"
+        	                         expired-url="/signin?sessionExpired"
         	                         error-if-maximum-exceeded="true"/>
         </sec:session-management>
         

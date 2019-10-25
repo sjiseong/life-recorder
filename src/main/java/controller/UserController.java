@@ -21,14 +21,14 @@ public class UserController {
 
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String getSignin() {
-		return "signin";
+		return "user/signin";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String postSignup(@RequestParam String id, @RequestParam String password, @RequestParam String name) {
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String simpleSignup(@RequestParam String id, @RequestParam String password, @RequestParam String name) {
 		User user = new User();
 		user.setId(id);
-		user.setPassword(password);
+		user.setPassword(passwordEncoder.encode(password));
 		user.setName(name);
 		userService.insert(user);
 		return "redirect:/main";
