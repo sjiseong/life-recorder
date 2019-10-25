@@ -15,13 +15,22 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String getSignin() {
 		return "signin";
 	}
 
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String postSignup(@RequestParam String id, @RequestParam String password, @RequestParam String name) {
+		User user = new User();
+		user.setId(id);
+		user.setPassword(password);
+		user.setName(name);
+		userService.insert(user);
+		return "redirect:/main";
+	}
 }
