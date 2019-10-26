@@ -22,8 +22,11 @@ public class HomeController {
 	@RequestMapping(value= {"main", "/", "home"}, method = RequestMethod.GET)
 	public String main(@AuthenticationPrincipal User user, Model model) {
 		model.addAttribute("userName", user.getName());
-		List<Record> recordList = recordService.getRecordInRecentOneDay(user.getId());
-		model.addAttribute("recordList", recordList);
+		List<Record> recordList1 = recordService.getRecordInRecentOneDay(user.getId(), "1");
+		List<Record> recordList2 = recordService.getRecordInRecentOneDay(user.getId(), "2");
+		model.addAttribute("recordList1", recordList1);
+		model.addAttribute("recordList2", recordList2);
+		model.addAttribute("curTime", System.currentTimeMillis());
 		return "home";
 	}
 	

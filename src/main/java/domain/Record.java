@@ -2,8 +2,15 @@ package domain;
 
 public class Record {
 
-	private String title, content, write_time;
+	private String title, content, write_time, summary;
 	private int id, type;
+	
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 	
 	public String getTitle() {
 		return title;

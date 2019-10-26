@@ -21,7 +21,7 @@ public class RecordService {
 	@Autowired 
 	private DateUtil dateUtil;
 	
-	public List<Record> getRecordInRecentOneDay(String userId){
+	public List<Record> getRecordInRecentOneDay(String userId, String recordType){
 		Date date = new Date(System.currentTimeMillis() - 86400000); //1000 * 60 * 60 *24
 		String start = dateUtil.formatDate(date);
 		String end = dateUtil.getCurrentTime();
@@ -29,6 +29,7 @@ public class RecordService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("userId", userId);
+		map.put("type", recordType);
 		return recordDao.selectRecordByPeriod(map);
 	}
 	

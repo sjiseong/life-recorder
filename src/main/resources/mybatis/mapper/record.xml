@@ -5,8 +5,10 @@
 <mapper namespace="record">
 	<select id="selectByPeriod" parameterType="Map" resultType="Record">
 		select * from record 
-			where writer = #{userId} 
+			where writer = #{userId}
+			and type = #{type}
 			and write_time &gt; to_date(#{start}, 'YYMMDDHH24MISS')
 			and write_time &lt;= to_date(#{end}, 'YYMMDDHH24MISS')
+			order by write_time desc
 	</select>
 </mapper>

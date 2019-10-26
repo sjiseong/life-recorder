@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DateUtil {
 
-	public SimpleDateFormat myFormat = new SimpleDateFormat("yyMMddkkmmss");
+	private SimpleDateFormat myFormat = new SimpleDateFormat("yyMMddHHmmss");
 	
 	public String getCurrentTime() {
 		return myFormat.format(new Date());
@@ -17,4 +17,5 @@ public class DateUtil {
 	public String formatDate(Date date) {
 		return myFormat.format(date);
 	}
+	
 }
