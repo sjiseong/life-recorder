@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="record">
+	<select id="selectByPeriod" parameterType="Map" resultType="Record">
+		select * from record 
+			where writer = #{userId} 
+			and write_time &gt; to_date(#{start}, 'YYMMDDHH24MISS')
+			and write_time &lt;= to_date(#{end}, 'YYMMDDHH24MISS')
+	</select>
+</mapper>

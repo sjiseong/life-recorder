@@ -13,11 +13,32 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<style>
+	.navbar {
+		position: fixed;
+		background-color: green;
+	}
+</style>
 </head>
 <body>
-	<h1>Hello ${userName }</h1>
-	<P>The time on the server is ${serverTime}.</P>
-	<button type="button" onclick="javascript:signout()">로그아웃</button>
+	<div class="navbar">
+		<h1>Hello ${userName }</h1>
+		<button type="button" onclick="javascript:signout()">로그아웃</button>
+	</div>
+	<div class="content container-fluid">
+		<div class="row">
+			<div class="col-xs-9 col-xs-offset-3">
+				<h1>Content</h1>
+				<c:forEach items="${recordList }" var="record">
+				<div class="record">
+					<p>${record.title }</p>
+					<p>${record.content }</p>
+					<p>${record.write_time }</p>
+				</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

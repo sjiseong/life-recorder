@@ -23,7 +23,7 @@ public class UserController {
 	public String getSignin() {
 		return "user/signin";
 	}
-
+	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String simpleSignup(@RequestParam String id, @RequestParam String password, @RequestParam String name) {
 		User user = new User();
