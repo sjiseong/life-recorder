@@ -6,9 +6,8 @@
 	<select id="selectByPeriod" parameterType="Map" resultType="Record">
 		select * from record 
 			where writer = #{userId}
-			and type = #{type}
-			and write_time &gt; to_date(#{start}, 'YYMMDDHH24MISS')
-			and write_time &lt;= to_date(#{end}, 'YYMMDDHH24MISS')
+			and write_time &gt; to_date(#{standardTime}, 'YYMMDDHH24MISS') - #{start}
+			and write_time &lt;= to_date(#{standardTime}, 'YYMMDDHH24MISS') - #{end}
 			order by write_time desc
 	</select>
 </mapper>

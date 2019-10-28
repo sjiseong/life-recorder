@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DateUtil {
 
-	private SimpleDateFormat myFormat = new SimpleDateFormat("yyMMddHHmmss");
+	public SimpleDateFormat myFormat = new SimpleDateFormat("yyMMddHHmmss");
+	public SimpleDateFormat oracleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
 	
 	public String getCurrentTime() {
 		return myFormat.format(new Date());

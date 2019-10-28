@@ -183,7 +183,7 @@
 	<c:set var="curTime" value="<%=new java.util.Date()%>" />
 	<c:set var="curTimeMillis" value="${curTime.time }" />
 	<nav class="navbar">
-		<h1>${userName }</h1>
+		<h1>${user.name }</h1>
 		<button type="button" onclick="javascript:signout()">로그아웃</button>
 	</nav>
 	<div class="container-fluid">
@@ -195,20 +195,30 @@
 				</div>
 				<div class="timeline-header-arrow triangle"></div>
 				<div class="timeline-header-right">
-					<input class="timeline-header-element" type="text"
-						placeholder="Search" />
+					<form>
+						<div class="form-group input-group">
+							<input class="form-control timeline-header-element" type="date"
+								name="date" />
+							<div class="input-group-btn">
+								<button class="btn " type="button" onclick="moveTo(this.form)">클릭</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="content">
-					<c:forEach items="${recordList1 }" var="record">
+				<div class="record-block">
+					<c:forEach items="${recordList }" var="record">
 						<fmt:parseDate var="writeTime" value="${record.write_time }"
 							pattern="yyyy-MM-dd HH:mm:sss"></fmt:parseDate>
 						<fmt:parseNumber var="distance"
 							value="${(curTimeMillis - writeTime.time) / 40000}"
 							integerOnly="true"></fmt:parseNumber>
-						<div class="record" style="top:${distance}px;">
+						<div
+							class="record <c:if test="${ record.type == 2}">record-idea</c:if>"
+							style="top:${distance}px;">
 							<div class="record-content">
 								<p class="record-title">${record.title }</p>
 								<p class="record-summary">${record.summary }</p>
@@ -219,23 +229,7 @@
 							</div>
 						</div>
 					</c:forEach>
-					<c:forEach items="${recordList2 }" var="record">
-						<fmt:parseDate var="writeTime" value="${record.write_time }"
-							pattern="yyyy-MM-dd HH:mm:sss"></fmt:parseDate>
-						<fmt:parseNumber var="distance"
-							value="${(curTimeMillis - writeTime.time) / 40000}"
-							integerOnly="true"></fmt:parseNumber>
-						<div class="record <c:if test="${ record.type == 2}">record-idea</c:if>" style="top:${distance}px;">
-							<div class="record-line">
-								<hr class="record-hr" />
-							</div>
-							<div class="record-content">
-								<p class="record-title">${record.title }</p>
-								<p class="record-summary">${record.summary }</p>
-								<p>${record.write_time }</p>
-							</div>
-						</div>
-					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -247,47 +241,73 @@
 	<script>
 		$timePanel = $("#time-panel");
 		var scrollBottom;
+		var standardTimeMillis = ${curTimeMillis};
+		var start = 1;
+		var end = 0;
+
+		/* 시간대 이동 */
+		function moveTo(f) {
+			var arr = f.date.value.split('-');
+			standardTimeMillis = new Date(arr[0], arr[1], arr[2]).getTime();
+			console.log(standardTimeMillis);
+		}
 
 		function formatDate(date) {
-			var arr = new Array( 
-			date.getFullYear(),
-			date.getMonth() + 1,
-			date.getDate(),
-			date.getHours(),
-			date.getMinutes(),
-			date.getSeconds());
-			
+			var arr = new Array(date.getFullYear(), date.getMonth() + 1, date
+					.getDate(), date.getHours(), date.getMinutes(), date
+					.getSeconds());
 			var ap = 'AM';
 			if (arr[3] > 12 || arr[3] == 0) {
 				ap = 'PM';
 				arr[3] %= 12;
 			}
-			
 			arr.forEach(function(item, index, array) {
-				if(item < 10) {
+				if (item < 10) {
 					array[index] = '0' + item;
 				}
 			});
-			
-			return arr[0] + ' ' + arr[1] + ' ' + arr[2] + ' ' + ap + ' ' + arr[3] + ':' + arr[4] + ':' + arr[5];
+			return arr[0] + ' ' + arr[1] + ' ' + arr[2] + ' ' + ap + ' '
+					+ arr[3] + ':' + arr[4] + ':' + arr[5];
 		}
-		
+
 		$(document).ready(function() {
-			$timePanel.text(formatDate(new Date()));
-			scrollBottom = $(document).height() - $(window).height() - 100;
+			$timePanel.text(formatDate(new Date(standardTimeMillis)));
+			scrollBottom = $(document).height() - $(window).height();
 		});
-		
+
 		//스크롤링
-		$(window).scroll( function() {
+		$(window).scroll(function() {
 			var scrollTop = $(window).scrollTop();
-			var date = new Date(${curTimeMillis} - scrollTop * 40000);
+			var date = new Date(standardTimeMillis - scrollTop * 40000);
 			$timePanel.text(formatDate(date));
 			if (scrollBottom <= scrollTop) {
 				getMoreRecord();
 			}
 		});
-		
 
+		function getMoreRecord() {
+			start += 1;
+			end += 1;
+			$.ajax({
+				url : 'record/getRecord',
+				type : 'post',
+				data : {
+					userId : '${user.id}',
+					standardTimeMillis : standardTimeMillis,
+					start : start,
+					end : end
+				},
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+				},
+				success : function(data) {
+					if (data) {
+						$(".content").append(data);
+						scrollBottom = $(document).height() - $(window).height();
+					}
+				}
+			});
+		}
 	</script>
 </body>
 </html>
