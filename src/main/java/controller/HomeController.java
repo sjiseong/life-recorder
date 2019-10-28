@@ -26,7 +26,6 @@ public class HomeController {
 		List<Record> recordList2 = recordService.getRecordInRecentOneDay(user.getId(), "2");
 		model.addAttribute("recordList1", recordList1);
 		model.addAttribute("recordList2", recordList2);
-		model.addAttribute("curTime", System.currentTimeMillis());
 		return "home";
 	}
 	

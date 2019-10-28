@@ -15,150 +15,173 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <style>
-	.triangle {
-		width: 0;
-		border: 5rem solid black;
-		border-top-width: 0px;
-		border-right-color: transparent;
-		border-left-color: transparent;
-	}
+.triangle {
+	width: 0;
+	border: 5rem solid black;
+	border-top-width: 0px;
+	border-right-color: transparent;
+	border-left-color: transparent;
+}
 
-	.navbar {
-		position: fixed;
-		width: 20rem;
-		height: 100vh;
-		left: 0;	
-		right: 0;
-		background-color: blue;
+.navbar {
+	position: fixed;
+	width: 20rem;
+	height: 100vh;
+	left: 0;
+	right: 0;
+	background-color: blue;
+}
+
+/* 페이지 귀속 */
+* {
+	box-sizing: border-box !important;
+}
+
+.content {
+	background-color: white;
+	font-size: 0;
+	position: relative;
+	width: 100%;
+	float: left;
+	padding: 0 7%;
+}
+
+.record {
+	position: absolute;
+	margin-bottom: 20px;
+	font-size: 0;
+	overflow: hidden;
+	width: 43%;
+	background-color: white;
+}
+
+.record-content {
+	float: left;
+	width: 80%;
+	border: 2px solid black;
+	font-size: 1.5rem;
+	padding: 10px;
+}
+
+.record-line {
+	float: left;
+	width: 20%;
+	position: absolute;
+	height: 100%;
+	right: 0;
+}
+
+.record-idea {
+	left: 50%;
+}
+
+.record-idea .record-content {
+	float: right;
+}
+
+.record-idea .record-line {
+	left: 0;
+}
+
+.record-hr {
+	position: relative;
+	border: 2px solid black;
+	margin: 0;
+	top: 50%;
+	/* transform:translate(-0,50%); */
+}
+
+.record-content>[class^=record-] {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+}
+
+.record-title {
+	-webkit-line-clamp: 2;
+	max-height: 4rem;
+	font-size: 1.8rem;
+	line-height: 2rem;
+	font-weight: bold;
+}
+
+.record-summary {
+	-webkit-line-clamp: 3;
+	max-height: 6rem;
+	font-size: 1.5rem;
+	line-height: 2rem;
+	margin-bottom: 0;
+}
+
+.timeline {
+	position: fixed;
+	width: 3rem;
+	height: 100vh;
+	left: 50%;
+	transform: translate(-50%, 0);
+	background-color: black;
+	z-index: 100;
+}
+
+.timeline-header {
+	font-size: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 120;
+	background-color: white;
+	height: 5rem;
+}
+
+[class^=timeline-header-] {
+	float: left;
+	display: inline-block;
+	position: absolute;
+	height: 100%;
+}
+
+.timeline-header-left, .timeline-header-right {
+	width: calc(50% - 5rem);
+	font-size: 3rem;
+}
+
+.timeline-header-right {
+	right: 0;
+}
+
+.timeline-header-arrow {
+	z-index: 110;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.timeline-header-element {
+	margin: 0;
+	line-height: 5rem;
+}
+
+@media ( min-width : 992px) {
+	body {
+		padding-top: 0;
+		padding-left: 20rem;
 	}
-	
-	/* 페이지 귀속 */
-	
-	* {
-		box-sizing: border-box !important;
-	}
-	
-	.content {
-		background-color: white;
-		font-size: 0;
-	}
-	
-	.content>[class^=record-] {
-		width: 50%;
-		padding: 20px 0 20px 8%;
-		float: left;
-	}
-	
-	.content>.record-idea {
-		padding: 20px 8% 20px 0;
-	}
-	
-	.record {
-		position: relative;
-		margin-bottom: 20px;
-		font-size: 0;
-		overflow: hidden;
-	}
-	
-	.record-content{
-		float:left;
-		width: 80%;
-		border: 2px solid black;
-		font-size: 1.5rem;
-		padding: 10px;
-	}
-	
-	.record-line {
-		float:left;
-		width: 20%;
-		position: absolute;
-		height:100%;
-		right:0;
-	}
-	
-	.record-idea .record-content {
-		float: right;
-	}
-		
-	.record-idea .record-line {
-		left: 0;
-	}
-		
-	.record-hr {
-		position:relative;
-		border:2px solid black;
-		margin:0;
-		top:50%;
-		transform:translate(-0,50%);
-	}
-	
-	.record-content>[class^=record-]{
-		overflow:hidden;
-		text-overflow: ellipsis;
-		word-break: break-all;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-	}
-	
-	.record-title {
-		-webkit-line-clamp: 2;
-		max-height: 4rem;
-		font-size:1.8rem;
-		line-height:2rem;
-		font-weight: bold;
-	}
-	
-	.record-summary {
-		-webkit-line-clamp: 3;
-		max-height: 6rem;
-		font-size:1.5rem;
-		line-height:2rem;
-		margin-bottom: 0;
-	}
-	
 	.timeline {
-		position:fixed;
-		width: 3rem;
-		height : 100vh;
-		left : 50%;
-		transform: translate(-50%, 0);
-		background-color: black;
-		z-index: 100;
+		left: calc(50% + 10rem);
 	}
-	
 	.timeline-header {
-		font-size: 0;
+		width: calc(100% - 20rem);
 	}
-		
-	[class^=timeline-header-] {
-		display: inline-block;
-	}
-	
-	.timeline-header-left, .timeline-header-right {
-		width: calc(50% - 5rem);
-		font-size: 4rem;
-	}
-	
-	.timeline-header-arrow {
-		position: relative;
-		background-color: white;
-		z-index: 110;
-	}
-	
-	@media (min-width: 992px){
-		body {
-	   		padding-top: 0;
-	   		padding-left: 20rem;
-		}
-		.timeline {
-			left : calc(50% + 10rem);
-		}
-	}
-	
-		
+}
+
+.record:hover {
+	z-index: 10;
+}
 </style>
 </head>
 <body>
+	<c:set var="curTime" value="<%=new java.util.Date()%>" />
+	<c:set var="curTimeMillis" value="${curTime.time }" />
 	<nav class="navbar">
 		<h1>${userName }</h1>
 		<button type="button" onclick="javascript:signout()">로그아웃</button>
@@ -167,53 +190,104 @@
 		<div class="row">
 			<div class="timeline"></div>
 			<div class="timeline-header">
-				<div class="timeline-header-left">Current Time</div>
+				<div class="timeline-header-left">
+					<p class="timeline-header-element" id="time-panel"></p>
+				</div>
 				<div class="timeline-header-arrow triangle"></div>
-				<div class="timeline-header-right">Right</div>
+				<div class="timeline-header-right">
+					<input class="timeline-header-element" type="text"
+						placeholder="Search" />
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<c:set var="curTime" value="<%= new java.util.Date()%>"/>
 			<div class="content">
-				<div class="record-incident">
 					<c:forEach items="${recordList1 }" var="record">
-					<fmt:parseDate var="writeTime" value="${record.write_time }" pattern="yyyy-MM-dd HH:mm:sss"></fmt:parseDate>
-					<fmt:parseNumber var="distance" value="${(curTime.time - writeTime.time) / 40000}" integerOnly="true"></fmt:parseNumber>
-					<div class="record" style="top:${distance}px">
-						<div class="record-content">
-							<p class="record-title">${record.title }</p>
-							<p class="record-summary">${record.summary }</p>
-							<p>${record.write_time }</p>
+						<fmt:parseDate var="writeTime" value="${record.write_time }"
+							pattern="yyyy-MM-dd HH:mm:sss"></fmt:parseDate>
+						<fmt:parseNumber var="distance"
+							value="${(curTimeMillis - writeTime.time) / 40000}"
+							integerOnly="true"></fmt:parseNumber>
+						<div class="record" style="top:${distance}px;">
+							<div class="record-content">
+								<p class="record-title">${record.title }</p>
+								<p class="record-summary">${record.summary }</p>
+								<p>${record.write_time }</p>
+							</div>
+							<div class="record-line">
+								<hr class="record-hr" />
+							</div>
 						</div>
-						<div class="record-line">
-		 					<hr class="record-hr"/>
-						</div>
- 					</div>
 					</c:forEach>
-				</div>
-				<div class="record-idea">
 					<c:forEach items="${recordList2 }" var="record">
-					<fmt:parseDate var="writeTime" value="${record.write_time }" pattern="yyyy-MM-dd HH:mm:sss"></fmt:parseDate>
-					<fmt:parseNumber var="distance" value="${(curTime.time - writeTime.time) / 40000}" integerOnly="true"></fmt:parseNumber>
-					<div class="record" style="top:${distance}px">
-	 					<div class="record-line">
-		 					<hr class="record-hr"/>
-	 					</div>
-						<div class="record-content">
-							<p class="record-title">${record.title }</p>
-							<p class="record-summary">${record.summary }</p>
-							<p>${record.write_time }</p>
+						<fmt:parseDate var="writeTime" value="${record.write_time }"
+							pattern="yyyy-MM-dd HH:mm:sss"></fmt:parseDate>
+						<fmt:parseNumber var="distance"
+							value="${(curTimeMillis - writeTime.time) / 40000}"
+							integerOnly="true"></fmt:parseNumber>
+						<div class="record <c:if test="${ record.type == 2}">record-idea</c:if>" style="top:${distance}px;">
+							<div class="record-line">
+								<hr class="record-hr" />
+							</div>
+							<div class="record-content">
+								<p class="record-title">${record.title }</p>
+								<p class="record-summary">${record.summary }</p>
+								<p>${record.write_time }</p>
+							</div>
 						</div>
- 					</div>
 					</c:forEach>
-				</div>
 			</div>
 		</div>
 	</div>
 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<jsp:include page="user/signout.jsp"></jsp:include>	
+	<jsp:include page="user/signout.jsp"></jsp:include>
+	<script>
+		$timePanel = $("#time-panel");
+		var scrollBottom;
+
+		function formatDate(date) {
+			var arr = new Array( 
+			date.getFullYear(),
+			date.getMonth() + 1,
+			date.getDate(),
+			date.getHours(),
+			date.getMinutes(),
+			date.getSeconds());
+			
+			var ap = 'AM';
+			if (arr[3] > 12 || arr[3] == 0) {
+				ap = 'PM';
+				arr[3] %= 12;
+			}
+			
+			arr.forEach(function(item, index, array) {
+				if(item < 10) {
+					array[index] = '0' + item;
+				}
+			});
+			
+			return arr[0] + ' ' + arr[1] + ' ' + arr[2] + ' ' + ap + ' ' + arr[3] + ':' + arr[4] + ':' + arr[5];
+		}
+		
+		$(document).ready(function() {
+			$timePanel.text(formatDate(new Date()));
+			scrollBottom = $(document).height() - $(window).height() - 100;
+		});
+		
+		//스크롤링
+		$(window).scroll( function() {
+			var scrollTop = $(window).scrollTop();
+			var date = new Date(${curTimeMillis} - scrollTop * 40000);
+			$timePanel.text(formatDate(date));
+			if (scrollBottom <= scrollTop) {
+				getMoreRecord();
+			}
+		});
+		
+
+	</script>
 </body>
 </html>
