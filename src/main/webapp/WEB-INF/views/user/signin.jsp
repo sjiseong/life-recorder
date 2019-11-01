@@ -31,11 +31,11 @@
 				value="${_csrf.token }" />
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Enter ID"
-					name="id" />
+					name="id" value="test"/>
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control"
-					placeholder="Enter Password" name="password" />
+					placeholder="Enter Password" name="password" value="1111"/>
 			</div>
 			<button class="btn btn-primary btn-block" type="submit">Sign
 				in</button>

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+.btn-primary {
+	background-color: #487eb0 !important;
+	border-color: #487eb0;
+}
+
+.btn-primary:hover {
+	border-color: #487eb0 !important;
+	opacity: 0.8;
+}
+
+.lightgray {
+	color: lightgray !important;
+}
+
+.hover-lightgray:hover{
+	background-color: #eee !important;
+	border-radius: 5px;
+}
+.hover-gray:hover{
+	background-color: #ccc !important;
+	border-radius: 5px;
+}
+
+textarea {
+	outline: none;
+}
+

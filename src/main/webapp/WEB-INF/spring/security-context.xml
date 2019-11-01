@@ -7,9 +7,10 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
     
     <!-- 정적 리소스 파일 -->
-    <sec:http pattern="/css/**" security="none" />
-    <sec:http pattern="/img/**" security="none" />
-    <sec:http pattern="/js/**" security="none" />
+    <sec:http pattern="/public/css/**" security="none" />
+    <sec:http pattern="/public/img/**" security="none" />
+    <sec:http pattern="/public/js/**" security="none" />
+    <sec:http pattern="/public/summernote/**" security="none" />
     
     <!-- 인터셉터, 권한, 로그인 기능 설정 -->
     <sec:http auto-config='true' use-expressions="true">

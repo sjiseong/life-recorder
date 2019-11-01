@@ -37,5 +37,10 @@ public class RecordService {
 	public List<Record> getRecordByPeriod(Map<String, String> map) {
 		return recordDao.selectRecordByPeriod(map);
 	}
+
+	public int insert(Record record) {
+		record.setWrite_time(dateUtil.getCurrentTime());
+		return recordDao.insert(record);
+	}
 	
 }

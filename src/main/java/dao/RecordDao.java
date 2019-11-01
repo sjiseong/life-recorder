@@ -18,5 +18,9 @@ public class RecordDao {
 	public List<Record> selectRecordByPeriod(Map map) {
 		return session.selectList("record.selectByPeriod", map);
 	}
+
+	public int insert(Record record) {
+		return session.insert("record.insert", record);
+	}
 	
 }

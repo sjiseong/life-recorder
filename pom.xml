@@ -58,6 +58,25 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- Jackson : Java to Json or Json to Java -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.3</version>
+		</dependency>
+
+		<!-- Validation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.0.3.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+
 		<!-- Mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

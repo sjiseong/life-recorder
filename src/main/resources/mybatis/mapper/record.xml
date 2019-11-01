@@ -10,4 +10,9 @@
 			and write_time &lt;= to_date(#{standardTime}, 'YYMMDDHH24MISS') - #{end}
 			order by write_time desc
 	</select>
+	
+	<insert id="insert" parameterType="Record">
+		insert into record values (seq_record_id.nextval, #{type}, #{title}, #{summary}, 
+		#{content}, #{writer}, to_date(#{write_time}, 'YYMMDDHH24MISS'))
+	</insert>
 </mapper>

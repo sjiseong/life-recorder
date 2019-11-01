@@ -1,13 +1,32 @@
 package domain;
 
-public class Record {
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
-	private String title, content, write_time, summary;
-	private int id, type;
+public class Record {
 	
+	@NotEmpty @Length(max=50, message="제목은 50글자 이내로 작성하세요")
+	private String title;
+	@NotEmpty @Length(max=90, message="요약글은 90글자 이내로 작성하세요")
+	private String summary;
+	@Range(min=1, max=2, message="잘못된 접근입니다")
+	private int type;
+	private String content, write_time, writer;
+	private int id;
+	
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
 	public String getSummary() {
 		return summary;
 	}
+	
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
