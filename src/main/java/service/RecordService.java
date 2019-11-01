@@ -39,7 +39,6 @@ public class RecordService {
 	}
 
 	public int insert(Record record) {
-		record.setWrite_time(dateUtil.getCurrentTime());
 		return recordDao.insert(record);
 	}
 	

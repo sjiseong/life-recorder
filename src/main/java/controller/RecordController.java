@@ -52,6 +52,11 @@ public class RecordController {
 		if (bindingResult.hasErrors()) {
 			return "record/insert";
 		}
+		if(record.getWrite_time().isEmpty()) {
+			record.setWrite_time(dateUtil.getCurrentTime());
+		} else {
+			record.setWrite_time(dateUtil.formatDate(new Date(Long.valueOf(record.getWrite_time()))));
+		}
 		record.setWriter(user.getId());
 		if (recordService.insert(record) != 1) {
 			model.addAttribute("msg", "등록 실패");
