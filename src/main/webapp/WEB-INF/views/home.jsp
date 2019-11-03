@@ -75,6 +75,11 @@
 	background-color: white;
 }
 
+.record a {
+	color: black;
+	text-decoration: none;
+}
+
 .record-block {
 	height: 2160px; /* 3600 * 24 / 40000 */
 }
@@ -85,6 +90,10 @@
 	border: 2px solid black;
 	font-size: 1.5rem;
 	padding: 10px;
+}
+
+.record-content:hover {
+	background-color: #f1f1f1;
 }
 
 .record-line {
@@ -250,11 +259,13 @@
 						<div
 							class="record <c:if test="${ record.type == 2}">record-idea</c:if>"
 							style="top:${distance}px;">
-							<div class="record-content">
-								<p class="record-title">${record.title }</p>
-								<p class="record-summary">${record.summary }</p>
-								<p>${record.write_time }</p>
-							</div>
+							<a href="/record/view?id=${record.id }">
+								<div class="record-content">
+									<p class="record-title">${record.title }</p>
+									<p class="record-summary">${record.summary }</p>
+									<p>${record.write_time }</p>
+								</div>
+							</a>
 							<div class="record-line">
 								<hr class="record-hr" />
 							</div>
@@ -353,11 +364,13 @@
 								$record.addClass('record-idea');
 							}
 							$record.append(
-								`<div class="record-content">
-									<p class="record-title">` + item.title + `</p>
-									<p class="record-summary">` + item.summary + `</p>
-									<p>` + item.write_time + `</p>
-								</div>
+								`<a href="/record/view?id=` + item.id + `"> 
+									<div class="record-content">
+										<p class="record-title">` + item.title + `</p>
+										<p class="record-summary">` + item.summary + `</p>
+										<p>` + item.write_time + `</p>
+									</div>
+								</a>
 								<div class="record-line">
 									<hr class="record-hr" />
 								</div>`

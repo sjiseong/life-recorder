@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import domain.Record;
 import domain.User;
 import service.RecordService;
+import service.UserService;
 import util.DateUtil;
 
 @Controller
@@ -28,6 +29,9 @@ public class RecordController {
 
 	@Autowired
 	private RecordService recordService;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private DateUtil dateUtil;
@@ -64,5 +68,20 @@ public class RecordController {
 			return "result";
 		}
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="record/view", method=RequestMethod.GET)
+	public String view(@AuthenticationPrincipal User user, @RequestParam int id, Model model) {
+		Record record = recordService.getById(id);
+		if (record == null) {
+			model.addAttribute("msg", "요청하신 자료가 존재하지 않습니다");
+		} else if (!userService.hasReadAuth(user.getId(), record.getWriter())) {
+			model.addAttribute("msg", "요청하신 자료를 읽을 권한이 없습니다");
+		} else {
+			model.addAttribute("record", record);
+			return "record/view";
+		}
+		model.addAttribute("url", "/");
+		return "result";
 	}
 }

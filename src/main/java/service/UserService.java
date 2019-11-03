@@ -33,4 +33,10 @@ public class UserService implements UserDetailsService{
 		userDao.insert(user);
 	}
 	
+	public boolean hasReadAuth(String id, String writer) {
+		if (id.equals(writer)) {
+			return true;
+		}
+		return false;
+	}
 }

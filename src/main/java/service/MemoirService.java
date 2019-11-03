@@ -29,12 +29,5 @@ public class MemoirService {
 	public Memoir getById(int id) {
 		return memoirDao.selectById(id);
 	}
-
-	public boolean hasReadAuth(String id, String writer) {
-		if (id.equals(writer)) {
-			return true;
-		}
-		return false;
-	}
 	
 }

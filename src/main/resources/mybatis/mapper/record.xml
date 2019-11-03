@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="record">
 	<select id="selectByPeriod" parameterType="Map" resultType="Record">
-		select * from record 
+		select id, type, title, summary, writer, write_time from record 
 			where writer = #{userId}
 			and write_time &gt; to_date(#{standardTime}, 'YYMMDDHH24MISS') - #{start}
 			and write_time &lt;= to_date(#{standardTime}, 'YYMMDDHH24MISS') - #{end}
@@ -15,4 +15,8 @@
 		insert into record values (seq_record_id.nextval, #{type}, #{title}, #{summary}, 
 		#{content}, #{writer}, to_date(#{write_time}, 'YYMMDDHH24MISS'))
 	</insert>
+	
+	<select id="selectById" parameterType="Int" resultType="Record">
+		select * from record where id = #{value}
+	</select>
 </mapper>

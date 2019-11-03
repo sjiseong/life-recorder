@@ -24,7 +24,7 @@ public class MemoirDao {
 	}
 
 	public Memoir selectById(int id) {
-		return session.selectOne("memoir.select", id);
+		return session.selectOne("memoir.selectById", id);
 	}
 	
 }

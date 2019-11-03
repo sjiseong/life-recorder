@@ -134,10 +134,12 @@ textarea {
 				return;
 			}
 			if (!f.datetime.value) {
-				if(!confirm('일시를 입력하지 않았습니다. 현재 시각으로 작성할까요?')) {
+				if(confirm('일시를 입력하지 않았습니다. 현재 시각으로 작성할까요?')) {
+					f.submit();
+				} else {
 					f.datetime.focus();
-					return;
 				}
+				return;
 			} else if (new Date(f.datetime.value) > new Date()) {
 				alert('일시는 현재 이전만 선택할 수 있습니다')
 				f.datetime.focus();

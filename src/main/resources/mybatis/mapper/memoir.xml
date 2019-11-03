@@ -9,11 +9,11 @@
 	</insert>
 	
 	<select id="selectList" parameterType="Map" resultType="Memoir">
-		select * from (select rownum rnum, m.* from memoir m where writer = #{userId})
+		select * from (select rownum rnum, m.id, m.title, m.writer, m.write_time from memoir m where writer = #{userId})
 		where rnum &gt; (${page} - 1) * 24 and rnum &lt;= ${page} * 24
 	</select>
 	
-	<select id="select" parameterType="Int" resultType="Memoir">
+	<select id="selectById" parameterType="Int" resultType="Memoir">
 		select * from memoir where id = #{value}
 	</select>
 </mapper>

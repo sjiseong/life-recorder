@@ -22,5 +22,9 @@ public class RecordDao {
 	public int insert(Record record) {
 		return session.insert("record.insert", record);
 	}
+
+	public Record selectById(int id) {
+		return session.selectOne("record.selectById", id);
+	}
 	
 }

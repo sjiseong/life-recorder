@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import domain.Memoir;
 import domain.User;
 import service.MemoirService;
+import service.UserService;
 
 @Controller
 public class MemoirController {
 
 	@Autowired
 	private MemoirService memoirService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="memoir", method=RequestMethod.GET)
 	public String getList(@AuthenticationPrincipal User user, Model model) {
@@ -32,13 +36,13 @@ public class MemoirController {
 		Memoir memoir = memoirService.getById(id);
 		if (memoir == null) {
 			model.addAttribute("msg", "요청하신 자료가 존재하지 않습니다");
-		} else if (!memoirService.hasReadAuth(user.getId(), memoir.getWriter())) {
+		} else if (!userService.hasReadAuth(user.getId(), memoir.getWriter())) {
 			model.addAttribute("msg", "요청하신 자료를 읽을 권한이 없습니다");
 		} else {
 			model.addAttribute("memoir", memoir);
 			return "memoir/view";
 		}
-		model.addAttribute("url", "/main");
+		model.addAttribute("url", "/");
 		return "result";
 	}
 	

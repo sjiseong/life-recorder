@@ -41,5 +41,9 @@ public class RecordService {
 	public int insert(Record record) {
 		return recordDao.insert(record);
 	}
+
+	public Record getById(int id) {
+		return recordDao.selectById(id);
+	}
 	
 }
