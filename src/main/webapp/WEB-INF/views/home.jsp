@@ -213,6 +213,7 @@
 			<li><p style="font-size: large; padding: 8px 16px; font-weight: bold;">${user.name }</p></li>
 			<li><a href="/main">Home</a></li>
 			<li><a href="/record/insert">기록 추가</a></li>
+			<li><a href="/memoir">회고록</a></li>
 			<li><a href="javascript:signout()">로그아웃</a></li>
 		</ul>
 	</nav>

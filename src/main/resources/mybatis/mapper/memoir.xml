@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memoir">
+	<insert id="insert" parameterType="Memoir">
+		insert into memoir values (seq_memoir_id.nextval, #{title}, 
+		#{content}, #{writer}, sysdate)
+	</insert>
+	
+	<select id="selectList" parameterType="Map" resultType="Memoir">
+		select * from (select rownum rnum, m.* from memoir m where writer = #{userId})
+		where rnum &gt; (${page} - 1) * 24 and rnum &lt;= ${page} * 24
+	</select>
+	
+	<select id="select" parameterType="Int" resultType="Memoir">
+		select * from memoir where id = #{value}
+	</select>
+</mapper>

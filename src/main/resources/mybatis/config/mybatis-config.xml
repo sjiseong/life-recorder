@@ -9,5 +9,6 @@
 	<mappers>
 		<mapper resource="mybatis/mapper/users.xml"/>
 		<mapper resource="mybatis/mapper/record.xml"/>
+		<mapper resource="mybatis/mapper/memoir.xml"/>
 	</mappers>
 </configuration>

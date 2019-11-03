@@ -1,10 +1,25 @@
 package domain;
 
+import java.util.List;
+
 public class Memoir {
 
-	private String title, content, write_time;
+	private String title, content, write_time, writer;
 	private int id;
+	private List<Record> recordList;
 	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public List<Record> getRecordList() {
+		return recordList;
+	}
+	public void setRecordList(List<Record> recordList) {
+		this.recordList = recordList;
+	}
 	public String getTitle() {
 		return title;
 	}
