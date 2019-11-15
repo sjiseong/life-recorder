@@ -22,10 +22,20 @@
 	
 	<context:property-placeholder location="classpath:mybatis/config/db.properties"/>
 	
-	<bean id="dataSource"
+<!-- 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="${driver-class}" p:url="${url}"
 		p:username="${user-name}" p:password="${password}"
-		p:maxActive="${max-active}"/>
+		p:maxActive="${max-active}"/> -->
+		
+	<!-- UCP pool in tomcat -->
+	<bean 
+		id="dataSource"
+		class="oracle.ucp.jdbc.PoolDataSourceImpl"
+		p:connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+		p:maxPoolSize="${max-pool-size}"
+		p:user="${user-name}"
+		p:password="${password}"
+		p:URL="${URL}"/>
 			
 </beans>

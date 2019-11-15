@@ -39,4 +39,8 @@ public class UserService implements UserDetailsService{
 		}
 		return false;
 	}
+
+	public User getById(String id) {
+		return userDao.getUserById(id);
+	}
 }

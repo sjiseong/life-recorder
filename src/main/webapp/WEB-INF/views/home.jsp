@@ -146,8 +146,12 @@
 	max-height:6rem;
 	font-size: 1.5rem;
 	line-height: 2rem;
-	margin-bottom: 0;
+	margin-bottom: 10px;
 	white-space: pre-line;
+}
+
+.record-write-time {
+	margin-bottom: 0;
 }
 
 .timeline {
@@ -263,7 +267,7 @@
 								<div class="record-content">
 									<p class="record-title">${record.title }</p>
 									<p class="record-summary">${record.summary }</p>
-									<p>${record.write_time }</p>
+									<p class="record-write-time">${record.write_time }</p>
 								</div>
 							</a>
 							<div class="record-line">
@@ -368,7 +372,11 @@
 									<div class="record-content">
 										<p class="record-title">` + item.title + `</p>
 										<p class="record-summary">` + item.summary + `</p>
+<<<<<<< HEAD
+										<p class="record-write-time">` + item.write_time + `</p>
+=======
 										<p>` + item.write_time + `</p>
+>>>>>>> e24306d56681e2904a53d31097bb773b143df624
 									</div>
 								</a>
 								<div class="record-line">

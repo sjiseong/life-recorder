@@ -22,6 +22,13 @@
 	width: 950px;
 	margin: auto;
 }
+.record-summary {
+	font-size: 1.5rem;
+}
+.record-content {
+	width: 100%;
+	resize: none;
+}
 </style>
 </head>
 <body>
@@ -32,9 +39,9 @@
 		<p class="text-right">작성자 : ${record.writer } &nbsp;&nbsp;&nbsp; 일시 : ${record.write_time }</p>
 		<h1>${record.title }</h1>
 		<hr />
-		<p>${record.summary }</p>
+		<p class="record-summary">${record.summary }</p>
 		<hr />
-		<p>${record.content }</p>
+		<p class="record-content">${record.content }</p>
 	</div>
 	<div class="footer"></div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

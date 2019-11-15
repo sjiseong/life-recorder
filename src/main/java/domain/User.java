@@ -1,13 +1,20 @@
-package domain;
+﻿package domain;
 
 import java.util.Collection;
+
+import javax.validation.constraints.Pattern;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class User implements UserDetails{
 
-	private String id, password, name;
+	@Pattern(regexp="[a-zA-Z0-9]{4,20}", message="아이디는 영문과 숫자 4 ~ 20 글자로 구성됨")
+	private String id;
+	@Pattern(regexp="[a-zA-Z0-9!@#^*_-]{4,20}", message="비밀번호는 숫자와 영문, 특수문자(!@#^*_-) 4 ~ 20 글자로 구성됨")
+	private String password;
+	@Pattern(regexp="[ㄱ-ㅎ가-힣ㅏ-ㅣ0-9A-Za-z!@#^*_-]{2,20}", message="닉네임은 숫자와 영문, 한글, 특수문자(!@#^*_-) 2 ~ 20 글자로 구성됨")
+	private String name;
 
 	public String getId() {
 		return id;

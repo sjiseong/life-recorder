@@ -20,4 +20,5 @@ public class UserDao {
 	public void insert(User user) {
 		session.insert("users.insert", user);
 	}
+
 }

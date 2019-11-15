@@ -16,7 +16,7 @@
     <sec:http auto-config='true' use-expressions="true">
         <!-- 인터셉터 경로 설정 -->
         <sec:intercept-url pattern="/signin" access="!isAuthenticated()" />
-        <sec:intercept-url pattern="/signup" access="permitAll" />
+        <sec:intercept-url pattern="/user/join" access="!isAuthenticated()" />
         <sec:intercept-url pattern="/**" access="isAuthenticated()" />
         <!-- 폼 로그인 설정 -->
         <sec:form-login login-page="/signin"

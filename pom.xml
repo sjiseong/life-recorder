@@ -15,11 +15,6 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<repositories>
-		<repository>
-			<id>oracle</id>
-			<name>ORACLE JDBC Repository</name>
-			<url>https://packages.atlassian.com/maven-3rdparty/</url>
-		</repository>
 	</repositories>
 	<dependencies>
 		<!-- Spring -->
@@ -62,7 +57,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.7.3</version>
+			<version>2.9.10.1</version>
 		</dependency>
 
 		<!-- Validation -->
@@ -96,11 +91,34 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- Jdbc -->
+		<!-- Jdbc : ATP 연결을 위해 18.3 이상 버전 필요 -->
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>12.1.0.1-atlassian-hosted</version>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc10</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+
+		<!-- ATP 연결에 필요 -->
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ucp</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+		<!-- Oracle Wallet 을 이용한 연결에 필요 -->
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>oraclepki</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>osdt_core</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>osdt_cert</artifactId>
+			<version>19.3.0.0</version>
 		</dependency>
 
 		<!-- AspectJ -->
