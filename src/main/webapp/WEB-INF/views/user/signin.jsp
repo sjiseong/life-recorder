@@ -13,14 +13,23 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
 <style>
 .center {
 	position: absolute;
-	width: 500px;
-	height: 300px;
+	width: 90%;
+	max-width: 500px;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.title {
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 50px;
+	font-size: 60px;
+	font-family: 'Amatic SC', cursive;
 }
 </style>
 </head>
@@ -29,6 +38,9 @@
 		<form action="/signin" method="post">
 			<input type="hidden" name="${_csrf.parameterName }"
 				value="${_csrf.token }" />
+			<div class="title">
+				Life Recorder
+			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Enter ID"
 					name="id" />
