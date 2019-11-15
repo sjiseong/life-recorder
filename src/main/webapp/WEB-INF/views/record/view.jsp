@@ -19,7 +19,9 @@
 	height: 100px;
 }
 .content {
-	width: 950px;
+	width: 85%;
+	max-width: 950px;
+	min-width: 300px;
 	margin: auto;
 }
 .record-summary {

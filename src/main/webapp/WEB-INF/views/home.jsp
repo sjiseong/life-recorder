@@ -14,41 +14,102 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <style>
+.no-transition {
+  -webkit-transition: height 0.01s;
+  -moz-transition: height 0.01s;
+  -ms-transition: height 0.01s;
+  -o-transition: height 0.01s;
+  transition: height 0.01s;
+}
+
 .triangle {
 	width: 0;
 	border: 5rem solid black;
-	border-top-width: 0px;
+	border-top-width: 0px !important;
 	border-right-color: transparent;
 	border-left-color: transparent;
 }
 
 .navbar {
 	position: fixed;
-	width: 20rem;
+	width: 10rem;
+	height: 100vh;
 	left: 0;
 	right: 0;
+	background-color: #f1f1f1;
+	z-index: 1000;
 }
 
-.navbar ul {
-	height: 100vh;
+#show-toggle {
+	float: left !important;
+	margin: 2px 0;
+	z-index: 200;
+}
+
+#hide-toggle {
+	margin-right: 35px;
+}
+
+.mynav-header {
+	margin : 20px 0;
+}
+
+.mynav-brand {
+	font-family: 'Amatic SC', cursive;
+	color: black;
+	font-size: 30px;
+	text-align: center;
+	font-weight: 600;
+	width: 100%;
+}
+
+.mynav-hr {
+	border: 1px gray solid;
+	width: 90%;
+	margin: 10px auto;
+}
+
+.nav-username {
+	font-size: 1.5rem; 
+	padding: 8px 10px; 
+	font-weight: 600;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.nav-username span {
+	margin-top: 5px;
+}
+
+.mynav-nav {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 200px;
-	background-color: #f1f1f1;
+	width: 100%;
 }
 
-.navbar li a {
+.nav-link {
 	display: block;
 	color: #000;
-	padding: 8px 16px;
-	text-decoration: none;
+	padding: 8px 10px;
+	text-decoration: none !important;
+	font-size: 1.5rem;
 }
 
-.navbar li a:hover {
+.nav-link:hover {
 	background-color: #555;
 	color: white;
+}
+
+.nav-link span, .nav-username span{
+	display: block;
+}
+
+.navbar-collapse {
+	padding: 0;
 }
 
 /* 페이지 귀속 */
@@ -146,12 +207,14 @@
 	max-height:6rem;
 	font-size: 1.5rem;
 	line-height: 2rem;
-	margin-bottom: 10px;
 	white-space: pre-line;
+	margin-bottom: 0;
 }
 
 .record-write-time {
+	margin-top: 10px;
 	margin-bottom: 0;
+	display: none !important;
 }
 
 .timeline {
@@ -181,18 +244,23 @@
 }
 
 .timeline-header-left, .timeline-header-right {
-	width: calc(50% - 5rem);
-	font-size: 3rem;
+	font-size: 20px;
+}
+
+.timeline-header-left {
+	width: 100%;
 }
 
 .timeline-header-right {
 	right: 0;
+	width: 0;
 }
 
 .timeline-header-arrow {
 	z-index: 110;
 	left: 50%;
 	transform: translate(-50%, 0);
+	border-width: 0;
 }
 
 .timeline-header-element {
@@ -200,7 +268,47 @@
 	line-height: 5rem;
 }
 
-@media ( min-width : 992px) {
+#time-panel {
+	width: 100%;
+	text-align: center;
+	transform: translate(-52.5px, 0);
+}
+
+@media (min-width: 640px) {
+	.timeline-header-left, .timeline-header-right {
+		width: calc(50% - 5rem);
+	}
+	.timeline-header-arrow {
+		border-width: 5rem;
+	}
+	.record-write-time {
+		display: block !important;
+	}
+	#time-panel {
+		transform: translate(-27.5px, 0)
+	}
+}
+
+@media (min-width: 768px) {
+	#time-panel {
+		transform: none;
+	}
+}
+
+@media (min-width : 768px) and (max-width : 1024px) {
+	body {
+		padding-top: 0;
+		padding-left: 10rem;
+	}
+	.timeline {
+		left: calc(50% + 5rem);
+	}
+	.timeline-header {
+		width: calc(100% - 10rem);
+	}
+}
+
+@media (min-width : 1024px) {
 	body {
 		padding-top: 0;
 		padding-left: 20rem;
@@ -210,6 +318,25 @@
 	}
 	.timeline-header {
 		width: calc(100% - 20rem);
+	}
+	#time-panel {
+		font-size: 30px;
+	}
+	.navbar {
+		width: 20rem;
+	}
+	.nav-link, .nav-username {
+		padding: 8px 20px;
+		font-size: 2rem;
+	}
+	.nav-link span, .nav-username span{
+		display: inline;
+	}
+	.nav-username {
+		text-align: left !important;
+	}
+	.mynav-brand {
+		font-size: 40px;
 	}
 }
 
@@ -221,20 +348,36 @@
 <body>
 	<c:set var="curTime" value="<%=new java.util.Date()%>" />
 	<c:set var="curTimeMillis" value="${curTime.time }" />
-	<nav class="navbar">
-		<ul>
-			<li><p style="font-size: large; padding: 8px 16px; font-weight: bold;">${user.name }</p></li>
-			<li><a href="/main">Home</a></li>
-			<li><a href="/record/insert">기록 추가</a></li>
-			<li><a href="/memoir">회고록</a></li>
-			<li><a href="javascript:signout()">로그아웃</a></li>
+	<nav class="navbar collapse in nav-collapse no-transition" id="myNav">
+		<div class="mynav-header">
+			<p class="mynav-brand">Life Recorder</p>
+		</div>
+		<hr class="mynav-hr">
+		<p class="nav-username" style ="text-align: center">
+			<i class="fas fa-user-circle" style="font-size: 20px;"></i>
+			&nbsp;
+			<span>${user.name }</span>
+		</p>
+		<hr class="mynav-hr">
+		<ul class="mynav-nav">
+			<li><a class="nav-link" href="/main"><span>Home</span></a></li>
+			<li><a class="nav-link" href="/record/insert"><span>기록 추가</span></a></li>
+			<li><a class="nav-link" href="/memoir"><span>회고록</span></a></li>
+			<li><a class="nav-link" href="javascript:signout()"><span>로그아웃</span></a></li>
 		</ul>
+		<hr class="mynav-hr">
+		<button type="button" id="hide-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
+			<i class="fas fa-chevron-left"></i>
+		</button>
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="timeline"></div>
 			<div class="timeline-header">
 				<div class="timeline-header-left">
+					<button type="button" id="show-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#myNav" style="border:none;">
+						<i class="fas fa-bars"></i>
+					</button>
 					<p class="timeline-header-element" id="time-panel"></p>
 				</div>
 				<div class="timeline-header-arrow triangle"></div>
@@ -320,12 +463,26 @@
 		}
 
 		$(document).ready(function() {
+			/* nav 노출 */
+			checkWidth();
+			
+			/* 스크롤, 시간 패널 */
 			$timePanel.text(formatDate(new Date(standardTimeMillis)));
 			scrollBottom = $(document).height() - $(window).height();
 			scrollTop = $(window).scrollTop();
 			checkScroll(scrollTop);
 		});
 
+		//nav 노출
+		function checkWidth() {
+			var width = $(window).innerWidth();
+			if ( width < 768) {
+				$('.navbar').removeClass('in');
+			} else {
+				$('.navbar').addClass('in');
+			}
+		}
+		
 		//스크롤링
 		$(window).scroll(function() {
 			scrollTop = $(window).scrollTop();
@@ -372,11 +529,7 @@
 									<div class="record-content">
 										<p class="record-title">` + item.title + `</p>
 										<p class="record-summary">` + item.summary + `</p>
-<<<<<<< HEAD
 										<p class="record-write-time">` + item.write_time + `</p>
-=======
-										<p>` + item.write_time + `</p>
->>>>>>> e24306d56681e2904a53d31097bb773b143df624
 									</div>
 								</a>
 								<div class="record-line">

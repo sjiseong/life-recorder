@@ -20,6 +20,13 @@
 	height: 100px;
 }
 
+.content {
+	width: 85%;
+	max-width: 950px;
+	min-width: 300px;
+	margin: auto;
+}
+
 .footer {
 	height: 100px;
 }
@@ -28,12 +35,25 @@ textarea {
 	resize: none;
 }
 
+.category-panel {
+	float: left;
+	width: 30%;
+}
+
+.date-panel {
+	float: right;
+	text-align: right;
+	width: 70%;
+}
+
 .category {
-	width: 150px;
+	max-width: 150px;
+	width: 100%;
 }
 
 .input-date {
-	width: 70%;
+	max-width: 200px;
+	width: calc(100% - 40px);
 	display: inline;
 }
 </style>
@@ -45,50 +65,46 @@ textarea {
 		</div>
 	</div>
 	<div class="content">
-		<div class="container-fluid" style="width: 80%">
-			<div class="row">
-				<form:form action="/record/insert" method="post"
-					modelAttribute="record">
-					<div class="row">
-						<div class="col-xs-8 form-group">
-							<form:select class="category form-control" path="type">
-								<form:option value="0" label="카테고리"></form:option>
-								<form:option value="1" label="사건"></form:option>
-								<form:option value="2" label="사유"></form:option>
-							</form:select>
-						</div>
-						<div class="col-xs-4 form-group">
-							<div style="text-align: right">
-								<label for="datetime" style="margin-right: calc(20% - 30px);">일시</label>
-								<input class="form-control input-date" name="datetime" type="datetime-local" 
-								placeholder="ex) 2019-11-15T14:59"/> 
-								<form:hidden path="write_time"/>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<form:input class="form-control" path="title"
-							placeholder="제목 (50자 이내)" />
-						<form:errors path="title" class="error" />
-					</div>
-					<div class="form-group">
-						<form:textarea class="form-control" path="summary"
-							placeholder="세줄 요약 (띄어쓰기 포함 90자 이내)"></form:textarea>
-						<form:errors path="summary"></form:errors>
-					</div>
-					<div class="form-group">
-						<form:textarea class="form-control" id="content" path="content"
-							placeholder="내용을 입력해 주세요" />
-						<form:errors path="content" />
-					</div>
-					<div class="form-group text-right">
-						<button class="btn btn-primary"
-							style="background-color: #337ab7 !important; border-color: #337ab7 !important;"
-							type="button" onclick="insertRecord(this.form);">등록</button>
-					</div>
-				</form:form>
+		<form:form action="/record/insert" method="post"
+			modelAttribute="record">
+			<div class="form-group" style="height: 34px;">
+				<div class="category-panel">
+					<form:select class="category form-control" path="type">
+						<form:option value="0" label="카테고리"></form:option>
+						<form:option value="1" label="사건"></form:option>
+						<form:option value="2" label="사유"></form:option>
+					</form:select>
+				</div>
+				<div class="date-panel">
+					<label for="datetime">일시</label> 
+					&nbsp;
+					<input
+						class="form-control input-date" name="datetime"
+						type="datetime-local" placeholder="ex) 2019-11-15T14:59" />
+					<form:hidden path="write_time" />
+				</div>
 			</div>
-		</div>
+			<div class="form-group">
+				<form:input class="form-control" path="title"
+					placeholder="제목 (50자 이내)" />
+				<form:errors path="title" class="error" />
+			</div>
+			<div class="form-group">
+				<form:textarea class="form-control" path="summary"
+					placeholder="세줄 요약 (띄어쓰기 포함 90자 이내)"></form:textarea>
+				<form:errors path="summary"></form:errors>
+			</div>
+			<div class="form-group">
+				<form:textarea class="form-control" id="content" path="content"
+					placeholder="내용을 입력해 주세요" />
+				<form:errors path="content" />
+			</div>
+			<div class="form-group text-right">
+				<button class="btn btn-primary"
+					style="background-color: #337ab7 !important; border-color: #337ab7 !important;"
+					type="button" onclick="insertRecord(this.form);">등록</button>
+			</div>
+		</form:form>
 	</div>
 	<div class="footer"></div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -134,7 +150,7 @@ textarea {
 				return;
 			}
 			if (!f.datetime.value) {
-				if(confirm('일시를 입력하지 않았습니다. 현재 시각으로 작성할까요?')) {
+				if (confirm('일시를 입력하지 않았습니다. 현재 시각으로 작성할까요?')) {
 					f.submit();
 				} else {
 					f.datetime.focus();
