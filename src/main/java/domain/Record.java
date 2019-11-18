@@ -1,8 +1,12 @@
 package domain;
 
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+
+import jdk.jfr.Registered;
 
 public class Record {
 	
@@ -14,7 +18,17 @@ public class Record {
 	private int type;
 	private String content, write_time, writer;
 	private int id;
+	@Pattern(regexp="[a-zA-Z]{1,60}|[가-힣]{1,20}", message="한글이나 영어로 가능한 한 간결하게 적어주세요")
+	String emotion;
 	
+	public String getEmotion() {
+		return emotion;
+	}
+
+	public void setEmotion(String emotion) {
+		this.emotion = emotion;
+	}
+
 	public String getWriter() {
 		return writer;
 	}

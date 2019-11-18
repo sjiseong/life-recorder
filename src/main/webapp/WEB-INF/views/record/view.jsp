@@ -39,6 +39,7 @@
 	</div>
 	<div class="content">
 		<p class="text-right">작성자 : ${record.writer } &nbsp;&nbsp;&nbsp; 일시 : ${record.write_time }</p>
+		<p class="text-right" style="vertical-align: middle"><i class="far fa-laugh" style="font-size: 1.5rem"></i>&nbsp;&nbsp;${record.emotion }</p>
 		<h1>${record.title }</h1>
 		<hr />
 		<p class="record-summary">${record.summary }</p>

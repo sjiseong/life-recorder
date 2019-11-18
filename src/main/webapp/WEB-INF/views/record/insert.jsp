@@ -56,6 +56,21 @@ textarea {
 	width: calc(100% - 40px);
 	display: inline;
 }
+
+.input-emotion {
+	width: 150px;
+	display: inline;
+}
+
+.emotion-panel {
+	float: left;
+}
+
+#registerBtn {
+	float: right;
+	background-color: #337ab7 !important;
+	border-color: #337ab7 !important;
+}
 </style>
 </head>
 <body>
@@ -85,6 +100,9 @@ textarea {
 				</div>
 			</div>
 			<div class="form-group">
+				
+			</div>
+			<div class="form-group">
 				<form:input class="form-control" path="title"
 					placeholder="제목 (50자 이내)" />
 				<form:errors path="title" class="error" />
@@ -100,8 +118,13 @@ textarea {
 				<form:errors path="content" />
 			</div>
 			<div class="form-group text-right">
-				<button class="btn btn-primary"
-					style="background-color: #337ab7 !important; border-color: #337ab7 !important;"
+				<div class="emotion-panel">
+					<label for="emotion">감정</label>
+					&nbsp;
+					<form:input path="emotion" class="form-control input-emotion" placeholder="가능한 한 간결하게"/>
+					<form:errors path="emotion"></form:errors>
+				</div>
+				<button class="btn btn-primary" id="registerBtn"
 					type="button" onclick="insertRecord(this.form);">등록</button>
 			</div>
 		</form:form>
