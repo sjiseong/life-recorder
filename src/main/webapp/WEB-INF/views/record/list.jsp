@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -344,32 +345,12 @@
 	z-index: 10;
 }
 </style>
+<c:set var="curTime" value="<%=new java.util.Date()%>" />
+<c:set var="curTimeMillis" value="${curTime.time }" />
+<sec:authentication var="userId" property="principal.username" />
 </head>
 <body>
-	<c:set var="curTime" value="<%=new java.util.Date()%>" />
-	<c:set var="curTimeMillis" value="${curTime.time }" />
-	<nav class="navbar collapse in nav-collapse no-transition" id="myNav">
-		<div class="mynav-header">
-			<p class="mynav-brand">Life Recorder</p>
-		</div>
-		<hr class="mynav-hr">
-		<p class="nav-username" style ="text-align: center">
-			<i class="fas fa-user-circle" style="font-size: 20px;"></i>
-			&nbsp;
-			<span>${user.name }</span>
-		</p>
-		<hr class="mynav-hr">
-		<ul class="mynav-nav">
-			<li><a class="nav-link" href="/main"><span>Home</span></a></li>
-			<li><a class="nav-link" href="/record/insert"><span>기록 추가</span></a></li>
-			<li><a class="nav-link" href="/memoir"><span>회고록</span></a></li>
-			<li><a class="nav-link" href="javascript:signout()"><span>로그아웃</span></a></li>
-		</ul>
-		<hr class="mynav-hr">
-		<button type="button" id="hide-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
-			<i class="fas fa-chevron-left"></i>
-		</button>
-	</nav>
+	<jsp:include page="/WEB-INF/views/sidebar.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="timeline"></div>
@@ -426,7 +407,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<jsp:include page="user/signout.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/user/signout.jsp"></jsp:include>
 	<script>
 		$timePanel = $("#time-panel");
 		var scrollBottom;
@@ -486,6 +467,7 @@
 		//스크롤링
 		$(window).scroll(function() {
 			scrollTop = $(window).scrollTop();
+			scrollBottom = $(document).height() - $(window).height();
 			var date = new Date(standardTimeMillis - scrollTop * 40000);
 			$timePanel.text(formatDate(date));
 			checkScroll(scrollTop);
@@ -505,7 +487,7 @@
 				url : 'record/getRecord',
 				type : 'post',
 				data : {
-					userId : '${user.id}',
+					userId : '${userId}',
 					standardTimeMillis : standardTimeMillis,
 					start : start,
 					end : end
