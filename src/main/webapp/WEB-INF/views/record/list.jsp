@@ -37,7 +37,7 @@
 .navbar {
 	position: fixed;
 	width: 10rem;
-	height: 100vh;
+	height: 100vh !important;
 	left: 0;
 	right: 0;
 	background-color: #f1f1f1;
@@ -124,7 +124,7 @@
 	position: relative;
 	width: 100%;
 	float: left;
-	padding: 0 7%;
+	padding: 0 3%;
 	margin-top: 50px;
 }
 
@@ -133,7 +133,7 @@
 	margin-bottom: 20px;
 	font-size: 0;
 	overflow: hidden;
-	width: 43%;
+	width: 47%;
 	background-color: white;
 }
 
@@ -148,8 +148,8 @@
 
 .record-content {
 	float: left;
-	width: 80%;
-	border: 2px solid black;
+	width: 90%;
+	border: 3px solid black;
 	font-size: 1.5rem;
 	padding: 10px;
 }
@@ -160,7 +160,7 @@
 
 .record-line {
 	float: left;
-	width: 20%;
+	width: 10%;
 	position: absolute;
 	height: 100%;
 	right: 0;
@@ -180,7 +180,7 @@
 
 .record-hr {
 	position: relative;
-	border: 2px solid black;
+	border: 1.5px solid black;
 	margin: 0;
 	top: 50%;
 	/* transform:translate(-0,50%); */
@@ -220,7 +220,7 @@
 
 .timeline {
 	position: fixed;
-	width: 3rem;
+	width: 1rem;
 	height: 100vh;
 	left: 50%;
 	transform: translate(-50%, 0);
@@ -272,10 +272,25 @@
 #time-panel {
 	width: 100%;
 	text-align: center;
-	transform: translate(-52.5px, 0);
+	transform: translate(-37.5px, 0);
 }
 
 @media (min-width: 640px) {
+	.content {
+		padding : 0 7%;
+	}
+	.record {
+		width: 43%;
+	}
+	.record-content {
+		width: 80%;
+	}
+	.record-line {
+		width: 20%;
+	}
+	.timeline {
+		width: 2rem;
+	}
 	.timeline-header-left, .timeline-header-right {
 		width: calc(50% - 5rem);
 	}
@@ -315,6 +330,7 @@
 		padding-left: 20rem;
 	}
 	.timeline {
+		width: 2.5rem;
 		left: calc(50% + 10rem);
 	}
 	.timeline-header {
@@ -454,6 +470,8 @@
 			checkScroll(scrollTop);
 		});
 
+		$(window).resize(checkWidth);
+		
 		//nav 노출
 		function checkWidth() {
 			var width = $(window).innerWidth();
