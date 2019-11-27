@@ -368,6 +368,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/sidebar.jsp"></jsp:include>
 	<div class="container-fluid">
+		<div class="test" style="position: fixed; font-size: 15px; z-index: 20000; background-color: white">
+			
+		</div>
 		<div class="row">
 			<div class="timeline"></div>
 			<div class="timeline-header">
@@ -432,6 +435,7 @@
 		var start = 1;
 		var end = 0;
 		var $content = $(".content");
+		var mobileBarHeight = 0;
 
 		/* 시간대 이동 */
 		function moveTo(f) {
@@ -468,6 +472,13 @@
 			scrollBottom = $(document).height() - $(window).height();
 			scrollTop = $(window).scrollTop();
 			checkScroll(scrollTop);
+			
+			/* 모바일 여부 확인 */
+			var filter = "win16|win32|win64|mac|macintel";
+			if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+				//MOBILE         
+				mobileBarHeight = 60;
+			}
 		});
 
 		$(window).resize(checkWidth);
@@ -483,13 +494,17 @@
 		}
 		
 		//스크롤링
-		$(window).scroll(function() {
+		$(document.body).on('touchmove', onScroll); // for mobile
+		$(window).on('scroll', onScroll); 
+		
+		// callback
+		function onScroll(){ 
 			scrollTop = $(window).scrollTop();
-			scrollBottom = $(document).height() - $(window).height();
+			scrollBottom = $(document).height() - $(window).innerHeight() - mobileBarHeight - 100; // 100px 전에 노출  
 			var date = new Date(standardTimeMillis - scrollTop * 40000);
 			$timePanel.text(formatDate(date));
 			checkScroll(scrollTop);
-		});
+		}
 		
 		function checkScroll(scrollTop) {
 			if (scrollBottom <= scrollTop) {
